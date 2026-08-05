@@ -2,7 +2,7 @@ from input import upload_file
 from static_analysis import run_ruff,parse_ruff
 from summary import metadata
 from prompt_build import format_meta,format_ruff,build_prompt
-from generator import genearte_llm
+from generator import generate_llm
 import streamlit as st
 import ast
 
@@ -19,7 +19,7 @@ if data is not None:
     p_b = build_prompt(data["Code"], format_meta(meta), format_ruff(ruff_analysis))
 
     with st.spinner("Reviewing the code......"):
-        final_answer = genearte_llm(p_b)
+        final_answer = generate_llm(p_b)
 
     st.subheader("Summary")
     with st.expander("📋 View AI Review"):

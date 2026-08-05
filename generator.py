@@ -8,7 +8,7 @@ client = genai.Client(
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
-def generate_llm(prompt):
+def generate_llm(prompt):   
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
