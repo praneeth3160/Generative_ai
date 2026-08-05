@@ -6,6 +6,8 @@ from generator import generate_llm
 import streamlit as st
 import ast
 
+st.title("AI CODE Reviwer")
+
 data = upload_file()
 
 if data is not None:

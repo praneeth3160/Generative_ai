@@ -3,7 +3,6 @@ import os
 
 os.makedirs("FILES", exist_ok=True)
 
-st.title("AI CODE Reviwer")
 
 language_map = {
     "py": "Python",
