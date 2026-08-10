@@ -12,7 +12,7 @@ language_map = {
 
 def upload_file():
 
-    upload = st.file_uploader("Upload your code file", type=["py", "cpp", "c"])
+    upload = st.file_uploader("Upload your code file .py for now", type=["py", "cpp", "c"])
     
     if upload is None:
         return None
