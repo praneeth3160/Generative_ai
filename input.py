@@ -11,6 +11,7 @@ language_map = {
     }
 
 def upload_file():
+
     upload = st.file_uploader("Upload your code file", type=["py", "cpp", "c"])
     
     if upload is None:
@@ -19,7 +20,6 @@ def upload_file():
     ext = upload.name.split('.')[-1]
     language = language_map.get(ext, 'Unknown')
 
-    st.success(f"Uploded: {upload.name}")
     st.write(f"Language: {language}")
 
     code = upload.read().decode("utf-8")

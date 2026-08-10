@@ -20,6 +20,13 @@ def format_ruff(ruff_analysis):
     
     return "\n".join(lines)
 
+def format_history(messages):
+    history = ""
+
+    for msg in messages:
+        history += f'{msg["role"].capitalize()}: {msg["content"]}\n\n'
+
+    return history
 
 def build_prompt(code,meta,ruff_analysis):
 
@@ -73,4 +80,49 @@ def build_prompt(code,meta,ruff_analysis):
         - Error Handling
     '''
 
+    return prompt
+
+def chat_prompt(code,meta,ruff_analysis,memory,question):
+    prompt = f'''
+You are a senior Python software engineer and AI coding assistant.
+
+The user has already uploaded a Python source file and is asking follow-up questions about it.
+
+Instructions:
+
+- Answer the user's question using the provided source code as the primary source of truth.
+- Use the metadata to understand the structure of the code.
+- Use the Ruff findings only as supporting evidence.
+- If the question refers to previous messages, use the conversation history.
+- If you are uncertain about something, clearly say so instead of guessing.
+- Do not invent functions or variables that do not exist.
+
+When appropriate, include corrected code snippets or improved implementations to support your explanation.
+
+------------------------------------
+METADATA
+{meta}
+------------------------------------
+
+------------------------------------
+RUFF ANALYSIS
+{ruff_analysis}
+------------------------------------
+
+------------------------------------
+SOURCE CODE
+{code}
+------------------------------------
+
+------------------------------------
+RECENT CONVERSATION
+{memory}
+------------------------------------
+
+------------------------------------
+USER QUESTION
+{question}
+------------------------------------
+
+'''
     return prompt
