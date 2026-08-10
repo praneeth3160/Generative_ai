@@ -10,7 +10,7 @@ import ast
 def show():
     st.markdown(st.session_state["final_answer"])
 
-st.title("AI CODE Reviwer")
+st.title("Code Lens")
 
 data = upload_file()
 
