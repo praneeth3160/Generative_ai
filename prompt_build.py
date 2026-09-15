@@ -126,3 +126,92 @@ USER QUESTION
 
 '''
     return prompt
+
+def lang_prompt(code):
+    prompt = f'''
+You are a senior Python software engineer performing a deep code analysis.
+
+Analyze the following Python source code and identify potential problems that
+may not be detected by traditional static analysis tools.
+
+Look for:
+
+- Logical bugs
+- Runtime errors
+- Incorrect program behavior
+- Edge cases
+- Exception handling problems
+- Infinite loops
+- Incorrect conditions
+- Resource management problems
+- Performance issues
+- Security problems
+- Maintainability problems
+
+Do not report something as a definite bug if it is only a possibility.
+Clearly distinguish between confirmed problems and potential problems.
+
+For every issue, provide:
+- issue type
+- line number if identifiable
+- severity
+- description
+- reason
+- suggested fix
+
+If no issues are found, return an empty list.
+
+SOURCE CODE:
+--------------------
+{code}
+--------------------'''
+
+    return prompt
+
+def new_code_prompt(analysis, code):
+    prompt = f'''
+You are a senior Python software engineer.
+
+Your task is to fix the problems identified in the analysis and return the
+complete corrected Python source code.
+
+You are given:
+
+1. The current Python source code.
+2. Analysis produced by static analysis tools and AI analysis.
+
+IMPORTANT RULES:
+
+- Fix the identified issues.
+- Preserve the original functionality of the program.
+- Do not remove functionality simply to silence an error.
+- Do not introduce unnecessary changes.
+- Do not invent functions, variables, classes, or dependencies.
+- Do not rewrite the entire program unless it is necessary to fix the issues.
+- Consider both the Ruff findings and the AI-detected issues.
+- Make the smallest reasonable changes required to fix the problems.
+- Ensure the resulting code is syntactically valid Python.
+- Ensure imports are correct.
+- Ensure variables and functions are properly defined.
+- Handle identified runtime and logical issues appropriately.
+
+After making the changes, mentally review the corrected code for additional
+obvious problems.
+
+Return ONLY the complete corrected Python source code.
+Do not return explanations.
+Do not use Markdown code fences.
+Do not include ```python.
+Do not include any text before or after the code.
+
+-----------------------------
+ANALYSIS
+{analysis}
+-----------------------------
+
+CURRENT SOURCE CODE
+-----------------------------
+{code}
+-----------------------------
+'''
+    return prompt

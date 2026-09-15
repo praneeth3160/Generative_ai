@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 
-os.makedirs("FILES", exist_ok=True)
+os.makedirs("FILES/orginal", exist_ok=True)
 
 
 language_map = {
@@ -24,7 +24,7 @@ def upload_file():
 
     code = upload.read().decode("utf-8")
     
-    path = os.path.join("FILES", upload.name)
+    path = os.path.join("FILES", "orginal", upload.name)
     with open(path, "wb") as f:
         f.write(upload.getbuffer())
 
